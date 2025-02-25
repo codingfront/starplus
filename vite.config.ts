@@ -13,7 +13,32 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    VitePWA({ registerType: "autoUpdate", manifest: false, injectRegister: "auto" }),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: false,
+      injectRegister: "auto",
+      devOptions: {
+        enabled: true,
+      },
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith("/images/genres/"),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "specific-image-cache",
+              expiration: {
+                maxEntries: 30,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+        ],
+      },
+    }),
     svgr({ svgrOptions: { icon: true } }),
     visualizer({ open: true }),
   ],

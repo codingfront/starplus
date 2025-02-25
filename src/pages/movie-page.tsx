@@ -164,87 +164,89 @@ export default function MoviePage() {
         description={`Discover details about ${title} from the IMDb Top 250 list.`}
       />
       <FullScreenLoading spinning={loading} />
-      <MoviePageWrapper>
-        <CoverWrapper>
-          {images?.[0] && <CoverImage src={images[0]} alt={title} />}
-          {user_cover && <CoverImage src={user_cover} alt={title} />}
-        </CoverWrapper>
-        <Container>
-          <TextContainer>
-            <DetailsSection>
-              <Flex vertical gap="middle">
-                <MovieTitle level={1}>{`${title} ${year}`}</MovieTitle>
-                <ScoresSection>
-                  <Flex align="center" gap="middle" component="ul">
-                    {renderRatingsList}
-                  </Flex>
-                </ScoresSection>
-                <div className="rating">
-                  <span>Rated: </span>
-                  {getRatingDescription}
-                </div>
-                <div>
-                  <DetailLabel>Director: </DetailLabel> {director}
-                </div>
-                <div>
-                  <DetailLabel>Writer(s): </DetailLabel> {writer}
-                </div>
-                <div>
-                  <DetailLabel>Top cast: </DetailLabel> {actors}
-                </div>
-                <Flex align="center" gap="small">
-                  <ClockCircleFilled />
-                  <span>{convertRuntimeToHours(runtime)}</span>
-                </Flex>
-              </Flex>
-              {genres && (
-                <GenresSection>
-                  <Flex gap="small" component="ul">
-                    {renderGenres}
-                  </Flex>
-                </GenresSection>
-              )}
-              <MoreInfoSection>
-                <a
-                  href={`https://www.imdb.com/title/${imdb_id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button icon={<RightCircleFilled />} size="large" type="primary">
-                    More info
-                  </Button>
-                </a>
-              </MoreInfoSection>
-            </DetailsSection>
-          </TextContainer>
-          <PaddingContent>
+      {!loading ? (
+        <MoviePageWrapper>
+          <CoverWrapper>
+            {images?.[0] && <CoverImage src={images[0]} alt={title} />}
+            {user_cover && <CoverImage src={user_cover} alt={title} />}
+          </CoverWrapper>
+          <Container>
             <TextContainer>
-              <TitleSection level={2} position="start">
-                Summary
-              </TitleSection>
-              <Paragraph>{plot}</Paragraph>
+              <DetailsSection>
+                <Flex vertical gap="middle">
+                  <MovieTitle level={1}>{`${title} ${year}`}</MovieTitle>
+                  <ScoresSection>
+                    <Flex align="center" gap="middle" component="ul">
+                      {renderRatingsList}
+                    </Flex>
+                  </ScoresSection>
+                  <div className="rating">
+                    <span>Rated: </span>
+                    {getRatingDescription}
+                  </div>
+                  <div>
+                    <DetailLabel>Director: </DetailLabel> {director}
+                  </div>
+                  <div>
+                    <DetailLabel>Writer(s): </DetailLabel> {writer}
+                  </div>
+                  <div>
+                    <DetailLabel>Top cast: </DetailLabel> {actors}
+                  </div>
+                  <Flex align="center" gap="small">
+                    <ClockCircleFilled />
+                    <span>{convertRuntimeToHours(runtime)}</span>
+                  </Flex>
+                </Flex>
+                {genres && (
+                  <GenresSection>
+                    <Flex gap="small" component="ul">
+                      {renderGenres}
+                    </Flex>
+                  </GenresSection>
+                )}
+                <MoreInfoSection>
+                  <a
+                    href={`https://www.imdb.com/title/${imdb_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button icon={<RightCircleFilled />} size="large" type="primary">
+                      More info
+                    </Button>
+                  </a>
+                </MoreInfoSection>
+              </DetailsSection>
             </TextContainer>
-          </PaddingContent>
-          <PaddingContent>
-            <OtherInfoSection>
-              <TitleSection level={2} position="start">
-                Details
-              </TitleSection>
-              <Row align="middle" justify="center" gutter={[24, 24]}>
-                <Col xs={24} sm={24} md={12} lg={6}>
-                  <OtherInfoImage src={poster} alt={title} />
-                </Col>
-                <Col xs={24} sm={24} md={12} lg={18}>
-                  <Descriptions column={1} bordered items={otherInfo} />
-                </Col>
-              </Row>
-            </OtherInfoSection>
-          </PaddingContent>
-          <PaddingContent>
-            <MovieGridList movieId={movieId} />
-          </PaddingContent>
-        </Container>
-      </MoviePageWrapper>
+            <PaddingContent>
+              <TextContainer>
+                <TitleSection level={2} position="start">
+                  Summary
+                </TitleSection>
+                <Paragraph>{plot}</Paragraph>
+              </TextContainer>
+            </PaddingContent>
+            <PaddingContent>
+              <OtherInfoSection>
+                <TitleSection level={2} position="start">
+                  Details
+                </TitleSection>
+                <Row align="middle" justify="center" gutter={[24, 24]}>
+                  <Col xs={24} sm={24} md={12} lg={6}>
+                    <OtherInfoImage src={poster} alt={title} />
+                  </Col>
+                  <Col xs={24} sm={24} md={12} lg={18}>
+                    <Descriptions column={1} bordered items={otherInfo} />
+                  </Col>
+                </Row>
+              </OtherInfoSection>
+            </PaddingContent>
+            <PaddingContent>
+              <MovieGridList movieId={movieId} />
+            </PaddingContent>
+          </Container>
+        </MoviePageWrapper>
+      ) : null}
     </>
   );
 }

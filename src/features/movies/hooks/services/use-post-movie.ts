@@ -41,7 +41,7 @@ const appendRatings = (values: MovieFormSubmitValuesType, formData: FormData) =>
   );
 
 export default function usePostMovie(form: FormInstance) {
-  const { loading, setLoadingState } = useLoading();
+  const { loading, setLoadingState } = useLoading(false);
   const { message } = App.useApp();
   const navigate = useNavigate();
   const [posterFileList, setPosterFileList] = useState<UploadFile[]>([]);

@@ -1,6 +1,6 @@
 import useRelatedMovies from "@/features/movies/hooks/services/use-get-related-movies";
 import MovieGridCard from "../movie-grid-card/movie-grid-card";
-import List from "@/components/list";
+import List from "@/components/list/list";
 import { MovieType } from "@/types/movies";
 import MovieGridCardSkeleton from "../movie-grid-card/movie-grid-card-skeleton";
 import { Fragment } from "react/jsx-runtime";

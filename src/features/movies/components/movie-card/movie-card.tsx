@@ -104,7 +104,10 @@ export default function MovieCard({ data }: MovieCardProps) {
           <Col xs={12} sm={8} md={8} lg={16} xl={16}>
             <Flex justify="end">
               <div>
-                <Link to={replaceInUrl(ROUTE_PATH.movie, id.toString())}>
+                <Link
+                  title={`Read more about ${title} Movie`}
+                  to={replaceInUrl(ROUTE_PATH.movie, id.toString())}
+                >
                   <Button
                     type="primary"
                     iconPosition="end"

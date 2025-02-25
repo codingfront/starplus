@@ -1,6 +1,6 @@
 import useMovies from "@/features/movies/hooks/services/use-get-movies";
 import MovieCard from "../movie-card/movie-card";
-import List from "@/components/list";
+import List from "@/components/list/list";
 import { MovieType } from "@/types/movies";
 import MovieCardSkeleton from "../movie-card/movie-card-skeleton";
 

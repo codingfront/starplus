@@ -48,22 +48,25 @@ const currencies = {
 type CurrencyCode = keyof typeof currencies;
 
 export function formatNumber(amount: string, currency?: CurrencyCode): string {
-  const validPattern = /^\d{1,3}([.,]?\d{3})*([.,]\d{2})?$/;
-  if (!validPattern.test(amount)) return "Invalid number format";
+  if (!amount) return "Invalid number format";
+  if (amount.includes("$")) return amount;
+  const cleanedAmount = amount.replace(/[^0-9.,-]/g, "").trim();
+
+  if (!cleanedAmount) return "Invalid number format";
 
   const decimalSeparator =
-    amount.includes(",") && amount.lastIndexOf(",") > amount.lastIndexOf(".") ? "," : ".";
-  const normalizedAmount = parseFloat(
-    amount
-      .replace(new RegExp(`\\${decimalSeparator === "," ? "." : ","}`, "g"), "")
-      .replace(decimalSeparator, "."),
-  );
+    cleanedAmount.includes(",") &&
+    cleanedAmount.lastIndexOf(",") > cleanedAmount.lastIndexOf(".")
+      ? ","
+      : ".";
 
-  if (isNaN(normalizedAmount)) return "Invalid number";
+  const normalizedAmount = cleanedAmount
+    .replace(new RegExp(`\\${decimalSeparator === "," ? "\\." : ","}`, "g"), "")
+    .replace(decimalSeparator, ".");
 
   return currency
     ? new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
-        normalizedAmount,
+        Number(normalizedAmount),
       )
-    : new Intl.NumberFormat("en-US").format(normalizedAmount);
+    : new Intl.NumberFormat("en-US").format(Number(normalizedAmount));
 }

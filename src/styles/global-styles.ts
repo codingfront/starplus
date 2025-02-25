@@ -174,7 +174,9 @@ html body input.ant-input:-webkit-autofill:active {
   box-shadow: 0 0 0px 1000px ${({ theme }) =>
     theme.antd.token.colorBgContainer} inset !important;
 }
-
+.ant-list-split.ant-list-something-after-last-item .ant-spin-container>.ant-list-items>.ant-list-item:last-child {
+  border-block-end: none;
+}
 .ant-btn-icon {
   margin-top: 2px;
 }

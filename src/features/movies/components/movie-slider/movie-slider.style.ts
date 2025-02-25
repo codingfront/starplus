@@ -1,17 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Typography } from "antd";
 
 const { Title, Text } = Typography;
 
-type SliderItemProps = {
-  $posterAddress: string;
-};
+const titleStyles = css`
+  &.ant-typography {
+    margin: 0;
+  }
+`;
 
-export const MovieSliderItem = styled.div<SliderItemProps>`
+const sliderHeight = css`
+  height: 85vh;
+  min-height: 850px;
+`;
+
+export const MovieSliderItem = styled.div<{ $posterAddress: string }>`
   position: relative;
   z-index: 2;
-  height: 85vh;
-  min-height: 800px;
+  ${sliderHeight}
   color: #fff;
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 30%),
     linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%),
@@ -24,20 +30,16 @@ export const MovieSliderItem = styled.div<SliderItemProps>`
 `;
 
 export const MovieSliderContent = styled.div`
-  padding: 180px 0 0 0;
+  padding-top: 180px;
   max-width: 600px;
 `;
 
 export const MovieSliderTitle = styled(Title)`
-  &.ant-typography {
-    margin: 0;
-  }
+  ${titleStyles};
 `;
 
 export const MovieSliderSubTitle = styled(Title)`
-  &.ant-typography {
-    margin: 0;
-  }
+  ${titleStyles};
 `;
 
 export const MovieSliderPropertyText = styled(Text)`
@@ -46,6 +48,7 @@ export const MovieSliderPropertyText = styled(Text)`
 
 export const MovieSliderStyle = styled.div`
   margin-bottom: -100px;
+  ${sliderHeight}
 `;
 
 export const AntCarousel = styled.div`

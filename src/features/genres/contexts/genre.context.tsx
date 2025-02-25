@@ -25,8 +25,8 @@ const GenreProvider = ({ children }: { children: React.ReactNode }) => {
   const getGenres = async () => {
     apiHandler(
       async () => {
-        const response = await api.get("genres");
-        setGenres(response.data);
+        const { data } = await api.get("genres");
+        setGenres(data);
       },
       error => {
         message.error(error?.response?.data.message);

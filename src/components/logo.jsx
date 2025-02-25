@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export default function Logo() {
   return (
     <Link to={ROUTE_PATH.home}>
-      <img src="/logo.svg" />
+      <img src="/logo.svg" alt="starplus" />
     </Link>
   );
 }

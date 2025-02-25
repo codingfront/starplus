@@ -1,5 +1,5 @@
 import MovieCard from "@/features/movies/components/movie-card/movie-card";
-import List from "@/components/list";
+import List from "@/components/list/list";
 import useGetGenreById from "@/features/movies/hooks/services/use-get-genre-by-id";
 import { MovieType } from "@/types/movies";
 import MovieCardSkeleton from "../movie-card/movie-card-skeleton";

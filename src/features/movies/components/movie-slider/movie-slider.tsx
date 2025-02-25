@@ -55,7 +55,7 @@ export default function MovieSlider() {
                           <MovieSliderPropertyText>{country}</MovieSliderPropertyText>
                         </Flex>
                         <Paragraph>{plot}</Paragraph>
-                        <Link to={replaceInUrl(ROUTE_PATH.movie, id)}>
+                        <Link title={title} to={replaceInUrl(ROUTE_PATH.movie, id)}>
                           <Button
                             iconPosition="end"
                             icon={<DoubleRightOutlined />}

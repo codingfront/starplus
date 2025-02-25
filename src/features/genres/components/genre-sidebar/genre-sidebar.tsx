@@ -4,7 +4,7 @@ import { useGenres } from "@/features/genres/hooks/data/use-genres";
 import { Flex } from "antd";
 import { NavLink } from "react-router";
 import RightCircleOutlined from "@ant-design/icons/RightCircleOutlined";
-import List from "@/components/list";
+import List from "@/components/list/list";
 import { GenreType } from "@/types/genres";
 import ROUTE_PATH from "@/router/paths";
 import { replaceInUrl } from "@/utils/navigation";

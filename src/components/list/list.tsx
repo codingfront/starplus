@@ -3,6 +3,7 @@ import { ApiGenreListResponse, ApiListResponse, ApiMoviesRelatedList } from "@/t
 import { List as AntdList } from "antd";
 import { ListGridType } from "antd/es/list";
 import { useRef, useMemo } from "react";
+import { ListStyle } from "./list.style";
 
 interface BaseListProps<T> {
   apiResponse: ApiListResponse<T> | ApiGenreListResponse<T> | ApiMoviesRelatedList<T>;
@@ -33,7 +34,7 @@ export default function List<T>({
   className,
   SkeletonComponent,
   skeletonCount = 0,
-  grid = { gutter: 16, column: 1 },
+  grid,
 }: ListProps<T>) {
   const entityElement = useRef<HTMLDivElement>(null);
 
@@ -56,11 +57,11 @@ export default function List<T>({
   );
 
   return (
-    <div ref={entityElement} className="entity-list">
+    <ListStyle ref={entityElement} className="entity-list">
       <AntdList
-        key={loading ? "loading" : "data"}
         itemLayout="vertical"
-        grid={grid}
+        {...(grid ? { grid } : {})}
+        bordered={false}
         pagination={
           isPaginated(apiResponse)
             ? {
@@ -72,7 +73,7 @@ export default function List<T>({
                 showSizeChanger: false,
                 align: "center",
               }
-            : undefined
+            : false
         }
         dataSource={loading ? skeletonItems : dataSource}
         rowKey={item => (item as any).id}
@@ -86,6 +87,6 @@ export default function List<T>({
           </AntdList.Item>
         )}
       />
-    </div>
+    </ListStyle>
   );
 }

@@ -9,7 +9,7 @@ import ROUTE_PATH from "@/router/paths";
 export default function useRequestLogin() {
   const { message } = App.useApp();
   const navigate = useNavigate();
-  const { loading, setLoadingState } = useLoading();
+  const { loading, setLoadingState } = useLoading(false);
   const auth = useAuth();
 
   const execute = async (formData: LoginDataTypes) => {

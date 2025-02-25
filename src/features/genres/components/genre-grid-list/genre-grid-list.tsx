@@ -6,7 +6,7 @@ import { shuffleAndSlice } from "@/utils/arrays";
 import { useGenres } from "@/features/genres/hooks/data/use-genres";
 import { replaceInUrl } from "@/utils/navigation";
 import ROUTE_PATH from "@/router/paths";
-import List from "@/components/list";
+import List from "@/components/list/list";
 import { GenreType } from "@/types/genres";
 import GenreGridListSkeleton from "./genre-grid-list-skeleton";
 
@@ -21,7 +21,11 @@ export default function GenreGridList() {
     const { name = "" } = data;
     return (
       <Link to={replaceInUrl(ROUTE_PATH.moviesByGenre, name)}>
-        <img src={`/images/genres/${name.toLowerCase()}.webp`} />
+        <img
+          loading="lazy"
+          alt={`${name} genre`}
+          src={`/images/genres/${name.toLowerCase()}.webp`}
+        />
         <Title level={4}>{name}</Title>
       </Link>
     );
@@ -36,7 +40,7 @@ export default function GenreGridList() {
         skeletonCount={12}
         className="genre-content"
         grid={{
-          gutter: 16,
+          gutter: [16, 16],
           xs: 1,
           sm: 2,
           md: 3,

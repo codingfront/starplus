@@ -11,11 +11,11 @@ export default function MovieCardSkeleton() {
         <Row gutter={[24, 24]}>
           <Col xs={24} sm={24} md={8} lg={8} xl={8}>
             <Flex vertical gap={16}>
-              <Skeleton.Image style={{ width: `100%`, height: "342px" }} active />
+              <Skeleton.Image style={{ width: `100%`, height: "326px" }} active />
             </Flex>
           </Col>
           <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-            <Flex vertical gap={24} align="stretch" justify="space-between">
+            <Flex vertical gap={16} align="stretch" justify="space-between">
               <Flex align="center" justify="space-between" gap="middle">
                 <Skeleton title={{ style: { flex: 1 } }} paragraph={false} active />
                 <ImdbRatingSection>
@@ -44,11 +44,11 @@ export default function MovieCardSkeleton() {
                   </Flex>
                 </Flex>
               </MovieInformation>
-              <Skeleton active title={false} paragraph={{ rows: 3 }} />
+              <Skeleton active title={false} paragraph={{ rows: 4 }} />
             </Flex>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={24} align="middle">
           <Col xs={12} sm={16} md={8} lg={8} xl={8}>
             <Skeleton.Button active block size="large" />
           </Col>

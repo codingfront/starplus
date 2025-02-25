@@ -23,7 +23,7 @@ export default function MovieGridCard({ data }: MovieGridCardProps) {
     <MovieGridItemWrapper>
       <Link title={title} replace to={replaceInUrl(ROUTE_PATH.movie, id)}>
         <MovieGridItemContent>
-          <MovieGridPoster src={poster} alt={title} />
+          <MovieGridPoster loading="lazy" src={poster} alt={title} />
           <MovieGridHoveredInfo className="hover-info">
             <Flex vertical gap="small">
               <span>{genres.join(", ")}</span>

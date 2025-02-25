@@ -7,7 +7,7 @@ import ROUTE_PATH from "@/router/paths";
 export default function useCreateRegistration() {
   const { message } = App.useApp();
   const navigate = useNavigate();
-  const { loading, setLoadingState } = useLoading();
+  const { loading, setLoadingState } = useLoading(false);
 
   const execute = async (formData: RegisterDataTypes) => {
     apiHandler(
