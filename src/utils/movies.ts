@@ -50,6 +50,7 @@ type CurrencyCode = keyof typeof currencies;
 export function formatNumber(amount: string, currency?: CurrencyCode): string {
   if (!amount) return "Invalid number format";
   if (amount.includes("$") || amount.includes(",")) return amount;
+  if (amount === "N/A") return "not available";
   const cleanedAmount = amount.replace(/[^0-9.,-]/g, "").trim();
 
   if (!cleanedAmount) return "Invalid number format";

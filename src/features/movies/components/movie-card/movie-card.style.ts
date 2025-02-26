@@ -13,7 +13,7 @@ export const MovieCardWrapper = styled.div`
 export const MoviePoster = styled.img`
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2/3;
 `;
 
 export const ImdbRatingSection = styled.div`
