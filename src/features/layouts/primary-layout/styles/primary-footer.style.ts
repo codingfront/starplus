@@ -69,17 +69,16 @@ export const CopyrightSection = styled.div`
 export const CopyrightBrandText = styled(Text)`
   padding: 0;
   margin: 0;
+  margin-inline-start: 5px;
+  color: ${({ theme }) => theme.antd.token.colorTextBase};
+  &.ant-typography {
+    font-family: ${({ theme }) => theme.antd.token.secondFontFamily};
+  }
 `;
 
 export const CopyrightLogoText = styled(Text)`
-  .logo-color {
+  &.ant-typography {
     font-family: ${({ theme }) => theme.antd.token.secondFontFamily};
-
-    &:nth-child(1) {
-      color: ${({ theme }) => theme.antd.token.colorTextBase};
-    }
-    &:nth-child(2) {
-      color: ${({ theme }) => theme.antd.token.colorPrimary};
-    }
   }
+  color: ${({ theme }) => theme.antd.token.colorPrimary};
 `;
