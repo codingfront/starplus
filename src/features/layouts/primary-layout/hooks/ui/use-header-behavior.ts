@@ -7,40 +7,58 @@ const toggleScrolledHeaderClass = (
 ) => {
   const isDesktop = window.innerWidth >= size.lg;
   const shouldAddScrolled = isDesktop ? currentScrollTop > 50 : true;
-
   headerElement.classList.toggle("header--scrolled", shouldAddScrolled);
+};
+
+const toggleSearchVisibility = (
+  headerElement: HTMLDivElement,
+  currentScrollTop: number,
+  lastScrollTop: number,
+) => {
+  const isScrollingUp = currentScrollTop < lastScrollTop;
+  const isAtTop = currentScrollTop <= 50;
+
+  if (isAtTop || isScrollingUp) {
+    headerElement.classList.add("header--show-search");
+  } else {
+    headerElement.classList.remove("header--show-search");
+  }
+};
+
+const toggleResponsiveClass = (headerElement: HTMLDivElement) => {
+  const shouldBeResponsive = window.innerWidth <= size.xl;
+  headerElement.classList.toggle("header--responsive", shouldBeResponsive);
 };
 
 export function useHeaderBehavior(headerWrapperElement: React.RefObject<HTMLDivElement>) {
   const lastScrollTop = useRef(0);
-  const resizeTimeout = useRef<number | null>(null);
+  const resizeHandlerRef = useRef<number | null>(null);
 
   const handleScroll = useCallback(() => {
     const headerElement = headerWrapperElement.current;
     if (!headerElement) return;
 
     const currentScrollTop = window.scrollY;
-    toggleScrolledHeaderClass(headerElement, currentScrollTop);
+    if (Math.abs(lastScrollTop.current - currentScrollTop) < 5) return;
 
-    const isScrollingUp = currentScrollTop < lastScrollTop.current;
-    headerElement.classList.toggle(
-      "header--show-search",
-      currentScrollTop > 50 && isScrollingUp,
-    );
+    toggleScrolledHeaderClass(headerElement, currentScrollTop);
+    toggleSearchVisibility(headerElement, currentScrollTop, lastScrollTop.current);
 
     lastScrollTop.current = currentScrollTop;
   }, [headerWrapperElement]);
 
   const handleResize = useCallback(() => {
-    if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
-
-    resizeTimeout.current = window.setTimeout(() => {
+    if (resizeHandlerRef.current) {
+      cancelAnimationFrame(resizeHandlerRef.current);
+    }
+    resizeHandlerRef.current = requestAnimationFrame(() => {
       const headerElement = headerWrapperElement.current;
       if (!headerElement) return;
 
       toggleScrolledHeaderClass(headerElement, window.scrollY);
-      headerElement.classList.toggle("header--responsive", window.innerWidth <= size.xl);
-    }, 150);
+      toggleSearchVisibility(headerElement, window.scrollY, lastScrollTop.current);
+      toggleResponsiveClass(headerElement);
+    });
   }, [headerWrapperElement]);
 
   useEffect(() => {
@@ -48,8 +66,9 @@ export function useHeaderBehavior(headerWrapperElement: React.RefObject<HTMLDivE
 
     const headerElement = headerWrapperElement.current;
     if (headerElement) {
-      headerElement.classList.add("header--show-search");
       toggleScrolledHeaderClass(headerElement, window.scrollY);
+      toggleSearchVisibility(headerElement, window.scrollY, lastScrollTop.current);
+      toggleResponsiveClass(headerElement);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -58,7 +77,7 @@ export function useHeaderBehavior(headerWrapperElement: React.RefObject<HTMLDivE
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
-      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+      if (resizeHandlerRef.current) cancelAnimationFrame(resizeHandlerRef.current);
     };
   }, [handleScroll, handleResize]);
 

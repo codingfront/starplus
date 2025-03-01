@@ -40,7 +40,9 @@ export default function List<T>({
 
   const onChange = (page: string) => {
     changePage?.(page);
-    scrollToElement(entityElement.current);
+    requestAnimationFrame(() => {
+      scrollToElement(entityElement.current);
+    });
   };
 
   const isPaginated = <T,>(response: unknown): response is ApiListResponse<T> =>
