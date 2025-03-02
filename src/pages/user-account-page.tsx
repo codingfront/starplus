@@ -21,7 +21,7 @@ const { Title } = Typography;
 
 export default function UserAccountPage() {
   const { email, created_at, name } = useUser() || {};
-  const { removeUser } = useAuth();
+  const { logout } = useAuth();
   const { loading } = useGetUserAccount();
 
   const navigate = useNavigate();
@@ -38,8 +38,8 @@ export default function UserAccountPage() {
       children: timeFormatter(created_at, "dddd, MMMM D, YYYY"),
     },
   ];
-  const logOut: PopconfirmProps["onConfirm"] = () => {
-    removeUser();
+  const onLogout: PopconfirmProps["onConfirm"] = () => {
+    logout();
     message.success("You have successfully logged out!");
     navigate(ROUTE_PATH.home);
   };
@@ -57,7 +57,7 @@ export default function UserAccountPage() {
                 <Popconfirm
                   title="logout"
                   description="Are you sure to logout?"
-                  onConfirm={logOut}
+                  onConfirm={onLogout}
                   okText="Yes"
                   cancelText="No"
                 >

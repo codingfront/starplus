@@ -3,7 +3,7 @@ import {
   getTokenDataFromStorage,
   setTokenDataToStorage,
   setUserDataToStorage,
-} from "../localstorage";
+} from "@/features/auth/hooks/data/localstorage";
 import { UserTokenTypes } from "@/types/auth";
 
 export async function refreshToken(): Promise<UserTokenTypes> {

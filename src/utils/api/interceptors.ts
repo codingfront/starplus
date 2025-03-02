@@ -4,7 +4,7 @@ import {
   getTokenDataFromStorage,
   setTokenDataToStorage,
   setUserDataToStorage,
-} from "../localstorage";
+} from "@/features/auth/hooks/data/localstorage";
 import { UserTokenTypes } from "@/types/auth";
 import { refreshToken } from "./refresh-token";
 import ROUTE_PATH from "@/router/paths";

@@ -19,8 +19,8 @@ export default function useRequestLogin() {
     }
     apiHandler(
       async () => {
-        await auth.getTokenFromServer(formData);
-        await auth.getUserFromServer();
+        await auth.fetchToken(formData);
+        await auth.fetchUser();
         message.success("Welcome back!");
         navigate(ROUTE_PATH.home);
       },

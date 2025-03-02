@@ -15,7 +15,7 @@ export default function useGetUserAccount() {
   useEffect(() => {
     apiHandler(
       async () => {
-        await auth.getUserFromServer();
+        await auth.fetchUser();
       },
       error => {
         message.error(error?.response?.data.message);
