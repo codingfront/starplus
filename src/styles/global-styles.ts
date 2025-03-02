@@ -1,10 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { device, size } from "./breakpoints";
-import fontsCss from "./fonts.module.css";
 import { MAIN_FONT_FAMILY, SECOND_FONT_FAMILY } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
- ${fontsCss};
 #nprogress {
   pointer-events: none;
 }
