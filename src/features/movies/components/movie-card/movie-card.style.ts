@@ -1,6 +1,6 @@
 import { Divider } from "antd";
 import styled from "styled-components";
-import ImdbIcon from "@/assets/icons/imdb-icon.svg?react";
+import ImdbIcon from "@/assets/icons/imdb-icon.svg";
 
 export const MovieCardWrapper = styled.div`
   width: 100%;

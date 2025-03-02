@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Typography } from "antd";
-import ImdbIcon from "@/assets/icons/imdb-icon.svg?react";
+import ImdbIcon from "@/assets/icons/imdb-icon.svg";
 
 const { Title } = Typography;
 

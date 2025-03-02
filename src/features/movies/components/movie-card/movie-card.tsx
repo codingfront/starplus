@@ -9,8 +9,8 @@ import {
   MovieInformation,
 } from "./movie-card.style";
 import { Typography, Flex, Row, Col, Button } from "antd";
-import ActorsIcon from "@/assets/icons/actors.svg?react";
-import DirectorIcon from "@/assets/icons/director.svg?react";
+import ActorsIcon from "@/assets/icons/actors.svg";
+import DirectorIcon from "@/assets/icons/director.svg";
 import { Link } from "react-router";
 import CameraOutlined from "@ant-design/icons/CameraOutlined";
 import ClockCircleOutlined from "@ant-design/icons/ClockCircleOutlined";

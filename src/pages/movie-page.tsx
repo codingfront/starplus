@@ -17,9 +17,9 @@ import {
 } from "@/styles/pages/movie-page.style";
 import { Link, useParams } from "react-router";
 import useGetMovie from "@/features/movies/hooks/services/use-get-movie";
-import RottenTomatoesIcon from "@/assets/icons/rottentomatoes.svg?react";
-import ImdbMultiColorIcon from "@/assets/icons/imdb-multicolor.svg?react";
-import MetacriticIcon from "@/assets/icons/metacritic.svg?react";
+import RottenTomatoesIcon from "@/assets/icons/rottentomatoes.svg";
+import ImdbMultiColorIcon from "@/assets/icons/imdb-multicolor.svg";
+import MetacriticIcon from "@/assets/icons/metacritic.svg";
 import { useMemo } from "react";
 import {
   convertRuntimeToHours,
@@ -30,8 +30,8 @@ import {
 import { replaceInUrl } from "@/utils/navigation";
 import ROUTE_PATH from "@/router/paths";
 import { Container, PaddingContent, TextContainer } from "@/styles/global-styles";
-import RightCircleFilled from "@ant-design/icons/RightCircleFilled";
 import ClockCircleFilled from "@ant-design/icons/ClockCircleFilled";
+import DoubleRightOutlined from "@ant-design/icons/DoubleRightOutlined";
 import MovieGridList from "@/features/movies/components/movie-grid-list/movie-grid-list";
 import TitleSection from "@/components/title-section/title-section";
 import MetaTags from "@/components/meta-tags";
@@ -211,7 +211,12 @@ export default function MoviePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button icon={<RightCircleFilled />} size="large" type="primary">
+                    <Button
+                      iconPosition="end"
+                      icon={<DoubleRightOutlined />}
+                      size="large"
+                      type="primary"
+                    >
                       More info
                     </Button>
                   </a>

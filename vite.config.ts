@@ -39,7 +39,7 @@ export default defineConfig({
         ],
       },
     }),
-    svgr({ svgrOptions: { icon: true } }),
+    svgr({ svgrOptions: { icon: true }, include: "**/*.svg" }),
     visualizer({ open: true }),
   ],
   resolve: {
