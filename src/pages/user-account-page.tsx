@@ -3,9 +3,7 @@ import { useAuth } from "@/features/auth/contexts/auth.context";
 import { useUser } from "@/features/auth/hooks/data/use-auth";
 import ROUTE_PATH from "@/router/paths";
 import { BackgroundBox, PaddingContent } from "@/styles/global-styles";
-import type { PopconfirmProps } from "antd";
 import { Descriptions, Button, App, Popconfirm, Typography } from "antd";
-import type { DescriptionsProps } from "antd";
 import { useNavigate } from "react-router";
 import heroUserAccount from "@/assets/images/hero-user-profile.jpg";
 import LogoutOutlined from "@ant-design/icons/LogoutOutlined";
@@ -16,6 +14,7 @@ import MetaTags from "@/components/meta-tags";
 import SubmitMovieForm from "@/features/movies/components/submit-movie-form/submit-movie-form";
 import useGetUserAccount from "@/features/auth/hooks/services/use-get-user-account";
 import FullScreenLoading from "@/components/full-screen-loading";
+import { useMemo } from "react";
 
 const { Title } = Typography;
 
@@ -23,22 +22,26 @@ export default function UserAccountPage() {
   const { email, created_at, name } = useUser() || {};
   const { logout } = useAuth();
   const { loading } = useGetUserAccount();
-
   const navigate = useNavigate();
   const { message } = App.useApp();
-  const items: DescriptionsProps["items"] = [
-    {
-      key: "1",
-      label: "email",
-      children: email,
-    },
-    {
-      key: "2",
-      label: "joined at",
-      children: timeFormatter(created_at, "dddd, MMMM D, YYYY"),
-    },
-  ];
-  const onLogout: PopconfirmProps["onConfirm"] = () => {
+
+  const items = useMemo(
+    () => [
+      {
+        key: "1",
+        label: "email",
+        children: email,
+      },
+      {
+        key: "2",
+        label: "joined at",
+        children: timeFormatter(created_at, "dddd, MMMM D, YYYY"),
+      },
+    ],
+    [email, created_at],
+  );
+
+  const onLogout = () => {
     logout();
     message.success("You have successfully logged out!");
     navigate(ROUTE_PATH.home);
@@ -55,16 +58,16 @@ export default function UserAccountPage() {
             <Descriptions
               extra={
                 <Popconfirm
-                  title="logout"
-                  description="Are you sure to logout?"
+                  title="Logout"
+                  description="Are you sure you want to log out?"
                   onConfirm={onLogout}
                   okText="Yes"
                   cancelText="No"
                 >
                   <Button
+                    iconPosition="end"
                     type="primary"
                     size="large"
-                    iconPosition="end"
                     icon={<LogoutOutlined />}
                   >
                     Logout
