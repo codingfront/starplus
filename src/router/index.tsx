@@ -7,6 +7,7 @@ import ProtectedRoute from "./protected-route";
 import NProgress from "nprogress";
 import ScrollToTop from "@/components/scroll-to-top";
 import { authRoutes, protectedRoutes, publicRoutes } from "./routes";
+import ReloadPrompt from "@/components/reload-prompt/reload-prompt";
 
 function RouteChangeHandler() {
   const location = useLocation();
@@ -24,7 +25,7 @@ export default function Router() {
     <BrowserRouter>
       <ScrollToTop />
       <RouteChangeHandler />
-
+      <ReloadPrompt />
       <Suspense fallback={null}>
         <Routes>
           {/* Primary Layout - Public Routes */}

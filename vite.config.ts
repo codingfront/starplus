@@ -4,6 +4,9 @@ import path from "path";
 import svgr from "vite-plugin-svgr";
 import { visualizer } from "rollup-plugin-visualizer";
 import { VitePWA } from "vite-plugin-pwa";
+import replace from "@rollup/plugin-replace";
+
+const replaceOptions = { __DATE__: new Date().toISOString(), preventAssignment: true };
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,7 +17,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       manifest: false,
       injectRegister: "auto",
       devOptions: {
@@ -39,6 +42,7 @@ export default defineConfig({
         ],
       },
     }),
+    replace(replaceOptions),
     svgr({ svgrOptions: { icon: true }, include: "**/*.svg" }),
     visualizer({ open: true }),
   ],
