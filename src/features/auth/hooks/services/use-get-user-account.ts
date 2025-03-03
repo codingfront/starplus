@@ -1,9 +1,7 @@
 import useLoading from "@/hooks/use-loading";
 import { apiHandler } from "@/utils/api";
-
 import { App } from "antd";
 import { useAuth } from "@/features/auth/contexts/auth.context";
-
 import { useEffect } from "react";
 
 export default function useGetUserAccount() {
@@ -18,7 +16,7 @@ export default function useGetUserAccount() {
         await auth.fetchUser();
       },
       error => {
-        message.error(error?.response?.data.message);
+        message.error(error?.response?.data.error);
       },
       setLoadingState,
     );

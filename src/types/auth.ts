@@ -22,3 +22,5 @@ export type UserDataTypes = {
   created_at: string;
   updated_at: string;
 };
+
+export type RedirectStatus = "token_expired" | "session_ended" | "unauthorized";

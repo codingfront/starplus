@@ -76,25 +76,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const fetchToken = async (data: LoginDataTypes) => {
-    try {
-      const { data: tokenData } = await oauthApi.post("oauth/token", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      setToken(tokenData);
-    } catch (error) {
-      console.error("Error fetching token:", error);
-    }
+    const { data: tokenData } = await oauthApi.post("oauth/token", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    setToken(tokenData);
   };
 
   const fetchUser = async () => {
-    try {
-      const { data: userData } = await oauthApi.get("api/user");
-      setUser(userData);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
+    const { data: userData } = await oauthApi.get("api/user");
+    setUser(userData);
   };
 
   useEffect(() => {

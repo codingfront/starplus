@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 
 export type ErrorType = {
   errors?: string;
+  error?: string;
   message?: string;
 };
 
