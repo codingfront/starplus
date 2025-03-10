@@ -3,6 +3,7 @@ import { api } from "@/utils/api";
 import { MovieType } from "@/types/movies";
 import { useSearchOptions } from "../ui/use-search-options";
 import useDebounce from "@/hooks/use-debounce";
+import { sanitizer } from "@/utils/sanitizer";
 
 export default function useGetSearchMovies() {
   const [data, setData] = useState<MovieType[]>([]);
@@ -11,7 +12,8 @@ export default function useGetSearchMovies() {
   const debouncedSearch = useDebounce(onSearch, 300);
 
   async function onSearch(query: string) {
-    if (!query) {
+    const sanitizedQuery = sanitizer(query);
+    if (!sanitizedQuery) {
       setData([]);
       return;
     }
@@ -23,7 +25,7 @@ export default function useGetSearchMovies() {
 
     try {
       const response = await api.get("movies", {
-        params: { q: query },
+        params: { q: sanitizedQuery },
         signal: abortControllerRef.current.signal,
       });
 

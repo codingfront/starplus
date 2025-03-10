@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router";
 import ROUTE_PATH from "@/router/paths";
 import { scrollToElement } from "@/utils/scroll";
 import { useEffect, useRef } from "react";
+import { sanitizer } from "@/utils/sanitizer";
 
 export default function SearchBar(props: any) {
   const { data, debouncedSearch } = useGetSearchMovies();
@@ -15,11 +16,15 @@ export default function SearchBar(props: any) {
   const autoCompleteInput = useRef<any>(null);
 
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === "Enter") {
-      const q = e.currentTarget.value.trim();
-      if (!q) return;
-      navigate(`${ROUTE_PATH.home}?q=${encodeURIComponent(q)}`, { replace: true });
-      scrollToElement(document.querySelector(".movie-item"));
+    if (e.key === "Enter" && e.currentTarget.value) {
+      const query = e.currentTarget.value.trim();
+      const sanitizedQuery = sanitizer(query);
+      if (!sanitizedQuery) return;
+
+      navigate(`${ROUTE_PATH.home}?q=${encodeURIComponent(sanitizedQuery)}`, {
+        replace: true,
+      });
+      scrollToElement(document.querySelector(".entity-list"));
       e.currentTarget.blur();
     }
   };
