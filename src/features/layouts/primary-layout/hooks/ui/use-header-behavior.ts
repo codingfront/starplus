@@ -63,7 +63,8 @@ export function useHeaderBehavior(headerWrapperElement: React.RefObject<HTMLDivE
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
+    const abortController = new AbortController();
+    const { signal } = abortController;
     const headerElement = headerWrapperElement.current;
     if (headerElement) {
       toggleScrolledHeaderClass(headerElement, window.scrollY);
@@ -71,12 +72,11 @@ export function useHeaderBehavior(headerWrapperElement: React.RefObject<HTMLDivE
       toggleResponsiveClass(headerElement);
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true, signal });
+    window.addEventListener("resize", handleResize, { signal });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      abortController.abort();
       if (resizeHandlerRef.current) cancelAnimationFrame(resizeHandlerRef.current);
     };
   }, [handleScroll, handleResize]);
